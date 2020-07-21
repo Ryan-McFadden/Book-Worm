@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles/style.css">
+
+        <title>Book Worm</title>
+    </head>
+
+    <body>
+        <div id="content-wrap">
+            <header>
+                <h1 id="header-title" class="header-title">Book Worm</h1>
+            </header>
+    
+            <div class="add-book">
+                <h2 class="add-book-title">Create New Book</h2>
+    
+                <div id="new-book-container">
+                    <form id="new-book-form">
+                        <input type="text" name="book-title" id="new-book-title" placeholder="Book Title">
+                        <label for="new-author-name">By:</label>
+                        <input type="text" name="author-name" id="new-author-name" placeholder="Author Name">
+                        <input type="submit" value="Save Book">
+                    </form>
+                </div>
+            </div>
+    
+            <main>
+                <h2 class="books-header">Books</h2>
+    
+                <div id="books-container">
+    
+                </div>
+            </main>
+    
+            <footer>
+                <h2 class="footer-title">Book Worm, Project 4 Application</h2>
+            </footer>
+        </div>
+
+        <script src="src/components/author.js"></script>
+        <script src="src/components/authors.js"></script>
+        <script src="src/components/app.js"></script>
+        <script src="src/adapters/AuthorsAdapter.js"></script>
+        <script src="src/index.js"></script>
+    </body>
+
+</html>
