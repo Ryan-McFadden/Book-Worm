@@ -8,13 +8,14 @@ class Authors {
 
     initBindingsAndEventListeners() {
         this.header = document.getElementById('header-title')
-        this.booksContainer = document.getElementById('books-container')
         this.newAuthorName = document.getElementById('new-author-name')
         this.newBookTitle = document.getElementById('new-book-title')
         this.bookForm = document.getElementById('new-book-form')
+        this.filterForm = document.getElementById('new-filter-form')
 
-        this.header.addEventListener('dblclick', this.fetchAndLoadAuthors.bind(this))
+        this.header.addEventListener('click', this.fetchAndLoadAuthors.bind(this))
         this.bookForm.addEventListener('submit', this.createAuthor.bind(this))
+        this.filterForm.addEventListener('submit', this.filterByBook.bind(this))
     }
 
     createAuthor(e) {
@@ -29,6 +30,55 @@ class Authors {
         })
     }
 
+    filterByBook(e) {
+        e.preventDefault()
+        const filter = document.getElementById('filter-field-input')
+        const container = document.getElementById('books-container')
+        container.innerHTML = ''
+
+        const newAuthors = this.authors.map(author => author.books.filter(book => book.title.includes(filter.value)))
+        console.log(newAuthors)
+        newAuthors.forEach(author => author.forEach(book => {
+
+            const aBook = document.createElement('div')
+            aBook.setAttribute('class', 'card')
+
+            const aBookTitle = document.createElement('h3')
+            aBookTitle.setAttribute('class', 'card-title')
+            aBookTitle.innerHTML = book.title
+            aBook.appendChild(aBookTitle)
+
+            container.appendChild(aBook)
+        }))
+        filter.value = ''
+    }
+
+    
+    displayAuthor(e) {
+        fetch(`http://localhost:3000/authors/${e.target.dataset.id}/books`)
+        .then(res => res.json())
+        .then(books => {
+            const container = document.getElementById('books-container')
+            container.innerHTML = ''
+            books.forEach(book => {
+                const aBook = document.createElement('div')
+                aBook.setAttribute('class', 'card')
+
+                const aBookTitle = document.createElement('h3')
+                aBookTitle.setAttribute('class', 'card-title')
+                aBookTitle.innerHTML = book.title
+                aBook.appendChild(aBookTitle)
+
+                const aBookAuthor = document.createElement('h5')
+                aBookAuthor.setAttribute('class', 'card-content')
+                aBookAuthor.innerHTML = `Author: ${book.author.name}`
+                aBook.appendChild(aBookAuthor)
+
+                container.appendChild(aBook)
+            })
+        })
+    }
+    
     fetchAndLoadAuthors() {
         this.authors = []
         this.adapter.getAuthors()
@@ -37,21 +87,7 @@ class Authors {
             this.render()
         })
     }
-
-    displayAuthor(e) {
-        fetch(`http://localhost:3000/authors/${e.target.dataset.id}/books`)
-        .then(res => res.json())
-        .then(books => {
-            const container = document.getElementById('books-container')
-            container.innerHTML = ''
-            books.forEach(book => {
-                const aBook = document.createElement('h3')
-                aBook.innerHTML = book.title
-                container.appendChild(aBook)
-            })
-        })
-    }
-
+    
     resetField() {
         this.newAuthorName.value = ''
         this.newBookTitle.value = ''

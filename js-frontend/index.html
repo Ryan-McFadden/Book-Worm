@@ -10,9 +10,9 @@
 
     <body>
         <div id="content-wrap">
-            <header>
+            <div class="header">
                 <h1 id="header-title" class="header-title">Book Worm</h1>
-            </header>
+            </div>
     
             <div class="add-book">
                 <h2 class="add-book-title">Create New Book</h2>
@@ -29,15 +29,21 @@
     
             <main>
                 <h2 class="books-header">Books</h2>
+
+                <div class="filter-field">
+                    <form id="new-filter-form">
+                        <label for="filter-field-input">Filter (Case Sensitive): </label>
+                        <input type="text" id="filter-field-input">
+                        <input type="submit">
+                    </form>
+                </div>
+                
+                <div class="books-container-wrapper">
+                    <ul id="books-container">
     
-                <div id="books-container">
-    
+                    </ul>
                 </div>
             </main>
-    
-            <footer>
-                <h2 class="footer-title">Book Worm, Project 4 Application</h2>
-            </footer>
         </div>
 
         <script src="src/components/author.js"></script>
