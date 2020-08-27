@@ -7,7 +7,11 @@ clone this repo and cd into your local directory
 to start the app run 
 
 ```
-npm i && npm start
+bunlde install
+
+rails db:migrate
+
+rails s
 ```
 
 after that enjoy the free book archiver!
