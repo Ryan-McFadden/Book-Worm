@@ -14,4 +14,6 @@ rails db:migrate
 rails s
 ```
 
+then view the index.html file in browser
+
 after that enjoy the free book archiver!
